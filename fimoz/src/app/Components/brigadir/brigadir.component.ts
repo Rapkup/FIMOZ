@@ -34,4 +34,8 @@ export class BrigadirComponent {
     this.selectedTask = null;
     this.selectedEquipment = null;
   }
+
+  logout(): void {
+    
+  }
 }
