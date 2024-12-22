@@ -9,9 +9,9 @@
     <div class="content">
       <div class="sidebar">
         <button class="menu-item active">Планирование работ</button>
-        <button class="menu-item">Отчеты по полям</button>
-        <button class="menu-item">Контроль техники</button>
-        <button class="menu-item" (click)="toggleTasks()">Просмотр задач работников</button>
+        <button class="menu-item" (click)="toggleTasks()">
+          Просмотр задач работников
+        </button>
       </div>
 
       <div class="task-section">
@@ -55,12 +55,23 @@
             <option>Поле №12</option>
             <option>Поле №13</option>
           </select>
-          <input type="date" placeholder="Начало выполнения"  [(ngModel)]="task.startDate"/>
-          <input type="date" placeholder="Конец выполнения"  [(ngModel)]="task.endDate"/>
+          <input
+            type="date"
+            placeholder="Начало выполнения"
+            [(ngModel)]="task.startDate"
+          />
+          <input
+            type="date"
+            placeholder="Конец выполнения"
+            [(ngModel)]="task.endDate"
+          />
         </div>
 
         <div class="task-details">
-          <textarea placeholder="Описание задачи" [(ngModel)]="task.description"></textarea>
+          <textarea
+            placeholder="Описание задачи"
+            [(ngModel)]="task.description"
+          ></textarea>
         </div>
 
         <div class="task-personnel">
@@ -86,7 +97,9 @@
             <option>Ксения Орлова Романовна | Категория B</option>
             <option>Роман Алексей Владимирович | Категория A</option>
           </select>
-          <button class="plan-task-button" (click)="plane()">Запланировать задачу</button>
+          <button class="plan-task-button" (click)="plane()">
+            Запланировать задачу
+          </button>
         </div>
       </div>
 
