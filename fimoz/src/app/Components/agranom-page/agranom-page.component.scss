@@ -153,4 +153,87 @@ body {
   .plan-task-button:hover {
     background-color: #d62839;
   }
+
+  .notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    z-index: 1000;
+    animation: fadeOut 4s forwards;
+  }
   
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  /* Стили для списка задач */
+.tasks-list {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.tasks-list h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.task {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.task h3 {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.task p {
+  font-size: 1rem;
+  color: #777;
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+
+.task p:first-child {
+  font-weight: bold;
+  color: #333;
+}
+
+.task p:last-child {
+  font-style: italic;
+}
+
+.task p:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.task .date-range {
+  font-size: 0.9rem;
+  color: #888;
+}

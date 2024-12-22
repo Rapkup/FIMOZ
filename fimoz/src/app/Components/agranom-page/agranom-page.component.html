@@ -1,47 +1,111 @@
 <div class="container">
-    <header>
-      <img src="assets/logo.png" alt="Колхоз" class="logo" />
-      <button class="logout-button">Выйти из аккаунта</button>
-    </header>
-  
-    <main>
-      <h1>Главный агроном</h1>
-      <div class="content">
-        <div class="sidebar">
-          <button class="menu-item active">Планирование работ</button>
-          <button class="menu-item">Отчеты по полям</button>
-          <button class="menu-item">Контроль техники</button>
-          <button class="menu-item">Просмотр задач работников</button>
+  <header>
+    <img src="assets/logo.png" alt="Колхоз" class="logo" />
+    <button class="logout-button" (click)="logout()">Выйти из аккаунта</button>
+  </header>
+
+  <main>
+    <h1>Главный агроном</h1>
+    <div class="content">
+      <div class="sidebar">
+        <button class="menu-item active">Планирование работ</button>
+        <button class="menu-item">Отчеты по полям</button>
+        <button class="menu-item">Контроль техники</button>
+        <button class="menu-item" (click)="toggleTasks()">Просмотр задач работников</button>
+      </div>
+
+      <div class="task-section">
+        <div class="task-options">
+          <select [(ngModel)]="task.season">
+            <option>Выбор сезона</option>
+            <option>Уборка</option>
+            <option>Посевная</option>
+          </select>
+          <select [(ngModel)]="task.equipment">
+            <option>Выбор техники</option>
+            <option>Трактор "Беларус-1523" | 4563-AA</option>
+            <option>Комбайн "КЛАСС" | 4578-BB</option>
+            <option>Трактор "МТЗ-82" | 4892-CC</option>
+            <option>Комбайн "Скос-9" | 4934-DD</option>
+            <option>Трактор "Кировец К-700" | 4021-EE</option>
+            <option>Трактор "Челленджер" | 4732-FF</option>
+            <option>Машина "ГАЗ-3307" | 5610-GG</option>
+            <option>Трактор "Т-150" | 4923-HH</option>
+            <option>Комбайн "Джон Дир W" | 4265-II</option>
+            <option>Трактор "ДТ-75" | 4789-JJ</option>
+            <option>Машина "УАЗ-3909" | 5031-KK</option>
+            <option>Трактор "Т-40" | 5342-LL</option>
+            <option>Комбайн "Нью Холланд" | 5401-MM</option>
+            <option>Трактор "Форд 8000" | 5864-NN</option>
+            <option>Комбайн "Ростсельмаш" | 5932-OO</option>
+            <option>Машина "МАЗ-537" | 6107-PP</option>
+            <option>Трактор "К-744" | 6192-QQ</option>
+            <option>Комбайн "Лексион 780" | 6271-RR</option>
+            <option>Трактор "Сварог" | 6350-SS</option>
+          </select>
+          <select [(ngModel)]="task.field">
+            <option>Выбор поля</option>
+            <option>Поле №1</option>
+            <option>Поле №2</option>
+            <option>Поле №5</option>
+            <option>Поле №6</option>
+            <option>Поле №7</option>
+            <option>Поле №10</option>
+            <option>Поле №11</option>
+            <option>Поле №12</option>
+            <option>Поле №13</option>
+          </select>
+          <input type="date" placeholder="Начало выполнения"  [(ngModel)]="task.startDate"/>
+          <input type="date" placeholder="Конец выполнения"  [(ngModel)]="task.endDate"/>
         </div>
-  
-        <div class="task-section">
-          <div class="task-options">
-            <select>
-              <option>Выбор сезона</option>
-            </select>
-            <select>
-              <option>Выбор техники</option>
-            </select>
-            <select>
-              <option>Выбор поля</option>
-            </select>
-            <input type="date" placeholder="Начало выполнения" />
-            <input type="date" placeholder="Конец выполнения" />
-          </div>
-  
-          <div class="task-details">
-            <textarea placeholder="Описание задачи"></textarea>
-            <button class="add-task-button">Добавить задачу</button>
-          </div>
-  
-          <div class="task-personnel">
-            <select>
-              <option>Добавление персонала</option>
-            </select>
-            <button class="plan-task-button">Запланировать задачу</button>
+
+        <div class="task-details">
+          <textarea placeholder="Описание задачи" [(ngModel)]="task.description"></textarea>
+        </div>
+
+        <div class="task-personnel">
+          <select [(ngModel)]="task.personnel">
+            <option>Добавление персонала</option>
+            <option>Иван Иванов Иванович | Категория B</option>
+            <option>Петр Петров Петрович | Категория C</option>
+            <option>Анна Сергеева Александровна | Категория B</option>
+            <option>Мария Васильева Евгеньевна | Категория D</option>
+            <option>Александр Козлов Валерьевич | Категория B</option>
+            <option>Елена Сидорова Николаевна | Категория C</option>
+            <option>Сергей Смирнов Викторович | Категория A</option>
+            <option>Ольга Новикова Дмитриевна | Категория B</option>
+            <option>Дмитрий Иванов Константинович | Категория B</option>
+            <option>Ирина Федорова Анатольевна | Категория D</option>
+            <option>Евгений Васильев Максимович | Категория B</option>
+            <option>Светлана Павлова Аркадьевна | Категория C</option>
+            <option>Николай Попов Вячеславович | Категория A</option>
+            <option>Виктория Михайлова Юрьевна | Категория B</option>
+            <option>Константин Чернов Павлович | Категория D</option>
+            <option>Юлия Ларина Игоревна | Категория C</option>
+            <option>Анатолий Григорьев Владимирыч | Категория B</option>
+            <option>Ксения Орлова Романовна | Категория B</option>
+            <option>Роман Алексей Владимирович | Категория A</option>
+          </select>
+          <button class="plan-task-button" (click)="plane()">Запланировать задачу</button>
+        </div>
+      </div>
+
+      <!-- Список задач работников -->
+      <div *ngIf="showTasks" class="tasks-list">
+        <h2>Задачи работников</h2>
+        <div *ngFor="let t of tasks">
+          <div class="task">
+            <h3>{{ t.season }} | {{ t.equipment }} | {{ t.field }}</h3>
+            <p>{{ t.description }}</p>
+            <p>Ответственный: {{ t.personnel }}</p>
+            <p>Сроки: {{ t.startDate | date }} - {{ t.endDate | date }}</p>
           </div>
         </div>
       </div>
-    </main>
+    </div>
+  </main>
+
+  <div *ngIf="notification" class="notification">
+    {{ notification }}
   </div>
-  
+</div>
