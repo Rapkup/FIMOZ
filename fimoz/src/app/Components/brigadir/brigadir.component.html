@@ -1,0 +1,98 @@
+<div class="container">
+    <header>
+      <img src="assets/logo.png" alt="Колхоз" class="logo" />
+      <button class="logout-button" (click)="logout()">Выйти из аккаунта</button>
+    </header>
+  
+    <main>
+      <h1>Бригадир скотоводческой бригады</h1>
+      <div class="content">
+        <div class="sidebar">
+          <button class="menu-item" (click)="showSection('distribution')">Распределение обязанностей</button>
+          <button class="menu-item" (click)="showSection('control')">Контроль выполнения задач</button>
+          <button class="menu-item" (click)="showSection('equipment')">Контроль доильной техники</button>
+        </div>
+  
+        <div class="task-section">
+          <!-- Секция распределения обязанностей -->
+          <div *ngIf="activeSection === 'distribution'" class="section">
+            <h2>Распределение обязанностей</h2>
+            <div class="task-options">
+              <label for="operator-select">Выбор оператора:</label>
+              <select id="operator-select" [(ngModel)]="selectedOperator">
+                <option *ngFor="let operator of operators" [value]="operator">{{ operator }}</option>
+              </select>
+  
+              <label for="task-select">Выбор задачи:</label>
+              <select id="task-select" [(ngModel)]="selectedTask">
+                <option *ngFor="let task of tasks" [value]="task.name">{{ task.name }}</option>
+              </select>
+  
+              <button [disabled]="!selectedOperator || !selectedTask" class="action-btn" (click)="onAssignTask()">Назначить задачу</button>
+            </div>
+          </div>
+  
+          <!-- Секция контроля выполнения задач -->
+          <div *ngIf="activeSection === 'control'" class="section">
+            <h2>Контроль выполнения задач</h2>
+            <div class="task-options">
+              <label for="task-select">Выбор задачи:</label>
+              <select id="task-select" [(ngModel)]="selectedTask" (change)="onSelectTaskForDetails()">
+                <option *ngFor="let task of tasks" [value]="task.name">{{ task.name }}</option>
+              </select>
+  
+              <button [disabled]="!selectedTask" class="action-btn" (click)="onSelectTaskForDetails()">Посмотреть детали</button>
+            </div>
+  
+            <!-- Отображение подробностей выбранной задачи -->
+            <div *ngIf="selectedTaskDetails" class="task-details">
+              <h3>Подробности задачи</h3>
+              <p><strong>Название задачи:</strong> {{ selectedTaskDetails.name }}</p>
+              <p><strong>Сезон:</strong> {{ selectedTaskDetails.season }}</p>
+              <p><strong>Техника:</strong> {{ selectedTaskDetails.equipment }}</p>
+              <p><strong>Поле:</strong> {{ selectedTaskDetails.field }}</p>
+              <p><strong>Описание:</strong> {{ selectedTaskDetails.description }}</p>
+              <p><strong>Ответственный:</strong> {{ selectedTaskDetails.personnel }}</p>
+              <p><strong>Сроки:</strong> {{ selectedTaskDetails.startDate | date }} - {{ selectedTaskDetails.endDate | date }}</p>
+            </div>
+          </div>
+  
+          <!-- Секция контроля доильной техники -->
+          <div *ngIf="activeSection === 'equipment'" class="section">
+            <h2>Контроль доильной техники</h2>
+            <div class="task-options">
+              <label for="equipment-select">Выбор техники:</label>
+                <select id="equipment-select" [(ngModel)]="selectedEquipment">
+                <option *ngFor="let item of equipment" [ngValue]="item">{{ item.name }}</option>
+                </select>
+
+  
+              <div class="equipment-actions">
+                <button [disabled]="!selectedEquipment" class="action-btn" (click)="changeEquipmentStatus(true)">Отметить как исправное</button>
+                <button [disabled]="!selectedEquipment" class="action-btn" (click)="changeEquipmentStatus(false)">Отметить как неисправное</button>
+              </div>
+  
+              <div *ngIf="selectedEquipment">
+                <p><strong>Техника:</strong> {{ selectedEquipment.name }}</p>
+                <p><strong>Статус:</strong> {{ selectedEquipment.isFunctional ? 'Исправна' : 'Неисправна' }}</p>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Список задач работников -->
+          <div *ngIf="showTasks" class="tasks-list">
+            <h2>Задачи работников</h2>
+            <div *ngFor="let t of tasksList">
+              <div class="task">
+                <h3>{{ t.season }} | {{ t.equipment }} | {{ t.field }}</h3>
+                <p>{{ t.description }}</p>
+                <p>Ответственный: {{ t.personnel }}</p>
+                <p>Сроки: {{ t.startDate | date }} - {{ t.endDate | date }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
