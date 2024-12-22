@@ -28,7 +28,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let worker of workers">
+              <tr *ngFor="let worker of availableWorkers">
                 <td>{{ worker.id }}</td>
                 <td>{{ worker.name }}</td>
                 <td>{{ worker.category }}</td>
@@ -42,8 +42,7 @@
 
         <!-- Модальное окно для назначения задачи -->
         <app-assign-task
-          *ngIf="isAssignTaskModalOpen"
-          [workers]="workers"
+          [isOpen]="isAssignTaskModalOpen"
           [availableAnimals]="availableAnimals"
           [availableMilkingMachines]="availableMilkingMachines"
           [selectedWorker]="selectedWorker"

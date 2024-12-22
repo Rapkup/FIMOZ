@@ -6,18 +6,19 @@ interface Worker {
   id: number;
   name: string;
   category: string;
+  status: string; // Добавлен статус
 }
 
 interface Animal {
   id: number;
   name: string;
-  status: string;
+  status: string; // Добавлен статус
 }
 
 interface MilkingMachine {
   id: number;
   name: string;
-  status: string;
+  status: string; // Добавлен статус
 }
 
 interface Task {
@@ -35,7 +36,6 @@ interface Task {
   styleUrls: ['./assign-task.component.scss']
 })
 export class AssignTaskComponent {
-  @Input() workers: Worker[] = []; // Список сотрудников
   @Input() availableAnimals: Animal[] = []; // Список животных
   @Input() availableMilkingMachines: MilkingMachine[] = []; // Список доильных установок
   @Input() isOpen: boolean = false; // Флаг для открытия/закрытия модального окна

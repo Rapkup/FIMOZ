@@ -2,13 +2,10 @@
     <div class="modal-content">
       <h2>Назначить задачу</h2>
   
-      <!-- Выбор сотрудника -->
+      <!-- Выбранный работник -->
       <div class="form-group">
-        <label for="worker">Сотрудник:</label>
-        <select id="worker" [(ngModel)]="selectedWorker" (change)="onWorkerChange()">
-          <option value="">Выберите сотрудника</option>
-          <option *ngFor="let worker of workers" [value]="worker">{{ worker.name }}</option>
-        </select>
+        <label>Сотрудник:</label>
+        <span>{{ selectedWorker?.name }}</span>
       </div>
   
       <!-- Выбор животного -->
@@ -16,7 +13,9 @@
         <label for="animal">Животное:</label>
         <select id="animal" [(ngModel)]="selectedAnimal">
           <option value="">Выберите животное</option>
-          <option *ngFor="let animal of availableAnimals" [value]="animal">{{ animal.name }} (Статус: {{ animal.status }})</option>
+          <option *ngFor="let animal of availableAnimals" [value]="animal" [disabled]="animal.status === 'busy'">
+            {{ animal.name }} (Статус: {{ animal.status }})
+          </option>
         </select>
       </div>
   
@@ -25,7 +24,9 @@
         <label for="milkingMachine">Доильная установка:</label>
         <select id="milkingMachine" [(ngModel)]="selectedMilkingMachine">
           <option value="">Выберите доильную установку</option>
-          <option *ngFor="let machine of availableMilkingMachines" [value]="machine">{{ machine.name }} (Статус: {{ machine.status }})</option>
+          <option *ngFor="let machine of availableMilkingMachines" [value]="machine" [disabled]="machine.status === 'busy'">
+            {{ machine.name }} (Статус: {{ machine.status }})
+          </option>
         </select>
       </div>
   
