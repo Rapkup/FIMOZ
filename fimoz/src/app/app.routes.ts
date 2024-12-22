@@ -5,6 +5,7 @@ import { ZavMolFermiComponent } from './Components/zav-mol-fermi/zav-mol-fermi.c
 
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent }, // Главная страница
   { path: 'agranom-page', component: AgranomPageComponent }, // Главная страница
   { path: 'zav-mol-fermi-page', component: ZavMolFermiComponent }, // Главная страница
