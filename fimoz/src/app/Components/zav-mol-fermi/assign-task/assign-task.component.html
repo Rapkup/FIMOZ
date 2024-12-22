@@ -1,0 +1,43 @@
+<div class="modal-overlay" *ngIf="isOpen">
+    <div class="modal-content">
+      <h2>Назначить задачу</h2>
+  
+      <!-- Выбор сотрудника -->
+      <div class="form-group">
+        <label for="worker">Сотрудник:</label>
+        <select id="worker" [(ngModel)]="selectedWorker" (change)="onWorkerChange()">
+          <option value="">Выберите сотрудника</option>
+          <option *ngFor="let worker of workers" [value]="worker">{{ worker.name }}</option>
+        </select>
+      </div>
+  
+      <!-- Выбор животного -->
+      <div class="form-group">
+        <label for="animal">Животное:</label>
+        <select id="animal" [(ngModel)]="selectedAnimal">
+          <option value="">Выберите животное</option>
+          <option *ngFor="let animal of availableAnimals" [value]="animal">{{ animal.name }} (Статус: {{ animal.status }})</option>
+        </select>
+      </div>
+  
+      <!-- Выбор доильной установки -->
+      <div class="form-group">
+        <label for="milkingMachine">Доильная установка:</label>
+        <select id="milkingMachine" [(ngModel)]="selectedMilkingMachine">
+          <option value="">Выберите доильную установку</option>
+          <option *ngFor="let machine of availableMilkingMachines" [value]="machine">{{ machine.name }} (Статус: {{ machine.status }})</option>
+        </select>
+      </div>
+  
+      <!-- Кнопка назначения задачи -->
+      <button class="assign-task-button" (click)="assignTask()">Назначить задачу</button>
+  
+      <!-- Уведомление -->
+      <div *ngIf="notification" class="notification">
+        {{ notification }}
+      </div>
+  
+      <!-- Кнопка закрытия модального окна -->
+      <button class="close-button" (click)="closeModal()">Закрыть</button>
+    </div>
+  </div>

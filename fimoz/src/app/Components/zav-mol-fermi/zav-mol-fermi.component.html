@@ -1,39 +1,125 @@
 <div class="container">
-    <!-- Заголовок -->
-    <h1>Заведующий ремонтных мастерских</h1>
-  
-    <!-- Секция "Назначить задачу" -->
-    <div class="section">
-      <h2>Назначить задачу</h2>
-      <div class="buttons">
-        <button>Мониторинг работы оборудования</button>
-        <button>Обслуживание оборудования</button>
-        <button>Назначить техобслуживание</button>
+  <header>
+    <img src="assets/logo.png" alt="Колхоз" class="logo" />
+    <button class="logout-button" (click)="logout()">Выйти из аккаунта</button>
+  </header>
+
+  <main>
+    <h1>Заведующий молочной фермы</h1>
+    <div class="content">
+      <div class="sidebar">
+        <button class="menu-item active" (click)="showSection('workers')">Список работников</button>
+        <button class="menu-item" (click)="showSection('tasks')">Рабочие задачи</button>
+        <button class="menu-item" (click)="showSection('equipment')">Мониторинг оборудования</button>
+        <button class="menu-item" (click)="showSection('reports')">Отчеты по продукции</button>
+      </div>
+
+      <div class="task-section">
+        <!-- Список работников -->
+        <div *ngIf="activeSection === 'workers'" class="workers-section">
+          <h2>Список работников</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Категория</th>
+                <th>Действие</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let worker of workers">
+                <td>{{ worker.id }}</td>
+                <td>{{ worker.name }}</td>
+                <td>{{ worker.category }}</td>
+                <td>
+                  <button class="assign-task-button" (click)="selectWorker(worker)">Выбрать</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Модальное окно для назначения задачи -->
+        <app-assign-task
+          *ngIf="isAssignTaskModalOpen"
+          [workers]="workers"
+          [availableAnimals]="availableAnimals"
+          [availableMilkingMachines]="availableMilkingMachines"
+          [selectedWorker]="selectedWorker"
+          (taskAssigned)="onTaskAssigned($event)"
+          (modalClosed)="closeAssignTaskModal()">
+        </app-assign-task>
+
+        <!-- Список рабочих задачи -->
+        <div *ngIf="activeSection === 'tasks'" class="tasks-section">
+          <h2>Рабочие задачи</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Рабочий</th>
+                <th>Животное</th>
+                <th>Доильная установка</th>
+                <th>Статус</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of workerTasks">
+                <td>{{ task.worker.name }}</td>
+                <td>{{ task.animal.name }}</td>
+                <td>{{ task.milkingMachine.name }}</td>
+                <td>{{ task.status }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Мониторинг оборудования -->
+        <div *ngIf="activeSection === 'equipment'" class="equipment-monitoring">
+          <h2>Мониторинг оборудования</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Оборудование</th>
+                <th>Состояние</th>
+                <th>Дата проверки</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Танк для молока</td>
+                <td>Исправно</td>
+                <td>2023-10-01</td>
+              </tr>
+              <tr>
+                <td>Насос для молока</td>
+                <td>Неисправно</td>
+                <td>2023-09-28</td>
+              </tr>
+              <tr>
+                <td>Комплект для упаковки</td>
+                <td>Исправно</td>
+                <td>2023-09-30</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Отчеты по молочной продукции -->
+        <div *ngIf="activeSection === 'reports'" class="reports-section">
+          <h2>Отчеты по молочной продукции</h2>
+          <ul>
+            <li>Отчет за октябрь 2023</li>
+            <li>Отчет за сентябрь 2023</li>
+            <li>Отчет за август 2023</li>
+          </ul>
+          <button class="download-report-button">Скачать отчет</button>
+        </div>
       </div>
     </div>
-  
-    <!-- Секция "Отчеты по молочной продукции" -->
-    <div class="section">
-      <h2>Отчеты по молочной продукции</h2>
-      <div class="reports">
-        <ul>
-          <li>Список отчетов</li>
-          <li>Список отчетов</li>
-          <li>Список отчетов</li>
-        </ul>
-        <button>Скачать отчет</button>
-      </div>
-    </div>
-  
-    <!-- Секция "Распределить задачи" -->
-    <div class="section">
-      <h2>Распределить задачи</h2>
-      <button>Создать задачу</button>
-    </div>
-  
-    <!-- Секция "Контроль выполнения задач" -->
-    <div class="section">
-      <h2>Контроль выполнения задач</h2>
-      <button>Уведомления о неисправности</button>
-    </div>
+  </main>
+
+  <div *ngIf="notification" class="notification">
+    {{ notification }}
   </div>
+</div>

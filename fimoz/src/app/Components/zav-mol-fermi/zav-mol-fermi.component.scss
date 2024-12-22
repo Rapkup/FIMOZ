@@ -1,51 +1,150 @@
+/* Основные стили для контейнера */
 .container {
-    font-family: Arial, sans-serif;
-    padding: 20px;
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Шапка */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.logo {
+  width: 120px;
+}
+
+.logout-button {
+  background-color: #e63946;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #d62839;
+}
+
+/* Основной контент */
+main {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Контейнер контента */
+.content {
+  display: flex;
+  gap: 20px;
+}
+
+/* Сайдбар */
+.sidebar {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-item {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.menu-item.active {
+  background-color: #ffc4c4;
+}
+
+.menu-item:hover {
+  background-color: #e6e6e6;
+}
+
+/* Секция задач */
+.task-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Таблицы */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: #f5f5f5;
+}
+
+/* Кнопки */
+.assign-task-button {
+  padding: 10px 20px;
+  background-color: #e63946;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.assign-task-button:hover {
+  background-color: #d62839;
+}
+
+.download-report-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.download-report-button:hover {
+  background-color: #0056b3;
+}
+
+/* Уведомление */
+.notification {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  animation: fadeOut 4s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
   }
-  
-  h1 {
-    text-align: center;
-    color: #333;
+  100% {
+    opacity: 0;
   }
-  
-  .section {
-    margin-bottom: 40px;
-  }
-  
-  h2 {
-    color: #555;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
-  }
-  
-  .buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .reports ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .reports li {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
+}
