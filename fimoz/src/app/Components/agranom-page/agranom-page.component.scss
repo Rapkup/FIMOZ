@@ -1,0 +1,156 @@
+/* Основные стили */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* Шапка */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .logo {
+    width: 120px;
+  }
+  
+  .logout-button {
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .logout-button:hover {
+    background-color: #d62839;
+  }
+  
+  /* Основной контент */
+  main {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Контейнер контента */
+  .content {
+    display: flex;
+    gap: 20px;
+  }
+  
+  /* Сайдбар */
+  .sidebar {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .menu-item {
+    padding: 10px;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+  }
+  
+  .menu-item.active {
+    background-color: #ffc4c4;
+  }
+  
+  .menu-item:hover {
+    background-color: #e6e6e6;
+  }
+  
+  /* Секция задач */
+  .task-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .task-options {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .task-options select,
+  .task-options input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .task-details {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .task-details textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    height: 100px;
+  }
+  
+  .add-task-button {
+    padding: 10px;
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-task-button:hover {
+    background-color: #d62839;
+  }
+  
+  .task-personnel {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .task-personnel select {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .plan-task-button {
+    padding: 10px;
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .plan-task-button:hover {
+    background-color: #d62839;
+  }
+  
