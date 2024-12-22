@@ -52,16 +52,16 @@ export class BrigadirComponent {
     if (this.selectedOperator && this.selectedTask) {
       console.log(`Выбран оператор: ${this.selectedOperator}`);
       console.log(`Выбрана задача: ${this.selectedTask}`);
-      
+
       // Находим задачу, которая соответствует выбранной задаче
-      const task = this.tasks.find(task => task.name === this.selectedTask);
+      const taskIndex = this.tasks.findIndex(task => task.name === this.selectedTask);
       
-      if (task) {
-        // Обновляем список задач
-        this.tasksList.push({ ...task, personnel: this.selectedOperator });
-  
-        // Логируем результаты добавления
-        console.log('Задачи после добавления:', this.tasksList);
+      if (taskIndex !== -1) {
+        // Обновляем выбранную задачу с новым ответственным
+        this.tasks[taskIndex].personnel = this.selectedOperator;
+        
+        // Логируем результаты
+        console.log('Обновленные задачи:', this.tasks);
       }
     }
   }
