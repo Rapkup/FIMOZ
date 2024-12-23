@@ -27,8 +27,12 @@ export class LoginComponent {
     }
     else if (this.autorization.login == "zavmol")
     {
-      this.router.navigate(['/zav-mol-fermi-page'])
+      this.router.navigate(['/zavmol'])
     }
+    else if (this.autorization.login == "brigadir")
+      {
+        this.router.navigate(['/brigadir-page'])
+      }
   } 
 
 }

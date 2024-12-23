@@ -20,6 +20,7 @@ export class BrigadirComponent {
     { name: 'Задача 3', season: 'Осень', equipment: 'Техника 3', field: 'Поле 3', description: 'Описание задачи 3', personnel: 'Марина Кузнецова', startDate: new Date(), endDate: new Date() }
   ];
 
+
   // Добавление поля исправности для техники
   equipment = [
     { name: 'Техника 1', isFunctional: true },
@@ -46,6 +47,7 @@ export class BrigadirComponent {
       this.tasksList = [...this.tasks];  // Задачи уже загружены и видны
     }
   }
+  
 
   // Метод для назначения задачи
   onAssignTask(): void {
