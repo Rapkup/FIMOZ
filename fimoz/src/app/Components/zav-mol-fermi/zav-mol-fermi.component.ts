@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 interface Worker {
   id: number;
@@ -122,6 +123,8 @@ export class ZavMolFermiComponent {
     }
   ];
 
+  constructor(private router: Router) {}
+
   get availableWorkers(): Worker[] {
     return this.workers.filter(worker => worker.status === 'available');
   }
@@ -135,7 +138,7 @@ export class ZavMolFermiComponent {
   }
 
   logout(): void {
-    console.log('Выход из аккаунта');
+    this.router.navigate(['/login']);
   }
 
   selectWorker(worker: Worker): void {

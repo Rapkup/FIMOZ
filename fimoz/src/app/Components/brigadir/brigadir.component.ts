@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-brigadir',
@@ -37,6 +38,8 @@ export class BrigadirComponent {
   showTasks: boolean = false;  // Скрыто до нажатия кнопки
   tasksList: any[] = [];  // Сюда будут загружаться задачи
   selectedTaskDetails: any | null = null;
+
+  constructor(private router: Router) {}
 
   // Метод для показа секции
   showSection(section: string): void {
@@ -94,6 +97,6 @@ export class BrigadirComponent {
   }
 
   logout(): void {
-    // Логика для выхода
+    this.router.navigate(['/login']);
   }
 }
