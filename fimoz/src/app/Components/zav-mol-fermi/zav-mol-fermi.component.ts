@@ -29,6 +29,14 @@ interface Task {
   status: string;
 }
 
+interface Report {
+  date: string;
+  workers: Worker[];
+  milkingMachines: MilkingMachine[];
+  equipmentStatus: string; // Статус оборудования (работает/не работает)
+  totalMilkProduced: number; // Итог по молоку (литры)
+}
+
 @Component({
   selector: 'app-zav-mol-fermi',
   standalone: true,
@@ -59,6 +67,23 @@ export class ZavMolFermiComponent {
   ];
 
   workerTasks: Task[] = [];
+  reports: Report[] = [
+    {
+      date: '2024-12-01',
+      workers: this.workers,
+      milkingMachines: this.milkingMachines,
+      equipmentStatus: 'Все в порядке',
+      totalMilkProduced: 500,
+    },
+    {
+      date: '2024-11-01',
+      workers: this.workers,
+      milkingMachines: this.milkingMachines,
+      equipmentStatus: 'Нуждается в ремонте',
+      totalMilkProduced: 450,
+    }
+  ];
+  selectedReport: Report | null = null;
   notification: string = '';
   errorNotification: string = '';
   activeSection: string = 'workers';
@@ -139,5 +164,9 @@ export class ZavMolFermiComponent {
   showSection(section: string): void {
     this.activeSection = section;
     this.resetSelections();
+  }
+
+  selectReport(report: Report): void {
+    this.selectedReport = report;
   }
 }
