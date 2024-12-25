@@ -1,4 +1,4 @@
-/* Основные стили */
+/* Общие стили */
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -81,76 +81,7 @@ h1 {
   background-color: #e6e6e6;
 }
 
-/* Секция задач */
-.task-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Секция с выбором оператора и задачи */
-.task-options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.task-options label {
-  font-weight: bold;
-}
-
-.task-options select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-}
-
-.task-options button {
-  padding: 10px;
-  background-color: #e63946;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.task-options button:disabled {
-  background-color: #ddd;
-  cursor: not-allowed;
-}
-
-.task-options button:hover {
-  background-color: #d62839;
-}
-
-/* Секция с действиями для техники */
-.equipment-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.equipment-actions button {
-  padding: 10px;
-  background-color: #e63946;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.equipment-actions button:disabled {
-  background-color: #ddd;
-  cursor: not-allowed;
-}
-
-.equipment-actions button:hover {
-  background-color: #d62839;
-}
-
-/* Общее оформление для секций */
+/* Секции */
 .section {
   background-color: #fff;
   padding: 20px;
@@ -158,10 +89,158 @@ h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+h2, h3 {
   font-size: 1.5rem;
   margin-bottom: 15px;
   color: #333;
+}
+
+/* Список работников */
+.workers-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.workers-section th,
+.workers-section td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.workers-section th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.workers-section tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.workers-section tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Кнопки в таблицах */
+.btn-select {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-select:hover {
+  background-color: #0056b3;
+}
+
+/* Рабочие задачи */
+.task-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.task-section th,
+.task-section td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.task-section th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.task-section tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.task-section tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Мониторинг оборудования */
+.equipment-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.equipment-section li {
+  padding: 10px;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.equipment-section button {
+  background-color: #e63946;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.equipment-section button:hover {
+  background-color: #d62839;
+}
+
+/* Назначение задачи */
+.assign-task-section {
+  margin-top: 20px;
+}
+
+.assign-task-section select,
+.assign-task-section button {
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Секция Мониторинг оборудования */
+.equipment-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.equipment-section li {
+  padding: 10px;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.equipment-section button {
+  background-color: #e63946;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.equipment-section button:hover {
+  background-color: #d62839;
+}
+
+
+.assign-task-section button {
+  background-color: red;
+  color: white;
+  cursor: pointer;
+}
+
+.assign-task-section button:hover {
+  background-color: red;
 }
 
 /* Уведомления */
@@ -180,58 +259,4 @@ h2 {
 .notification.error {
   background-color: #f8d7da;
   color: #721c24;
-}
-
-/* Таблицы */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-table th,
-table td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-table th {
-  background-color: #f5f5f5;
-  font-weight: bold;
-}
-
-table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-table tr:hover {
-  background-color: #f1f1f1;
-}
-
-/* Кнопки */
-.assign-task-button {
-  padding: 10px;
-  background-color: #d62839;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.assign-task-button:hover {
-  background-color: #d62839;
-}
-
-.download-report-button {
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.download-report-button:hover {
-  background-color: #0056b3;
 }

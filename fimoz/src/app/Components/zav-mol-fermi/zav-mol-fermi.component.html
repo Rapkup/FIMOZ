@@ -11,82 +11,39 @@
         <button class="menu-item" [class.active]="activeSection === 'workers'" (click)="showSection('workers')">Список работников</button>
         <button class="menu-item" [class.active]="activeSection === 'tasks'" (click)="showSection('tasks')">Рабочие задачи</button>
         <button class="menu-item" [class.active]="activeSection === 'equipment'" (click)="showSection('equipment')">Мониторинг оборудования</button>
-        <button class="menu-item" [class.active]="activeSection === 'reports'" (click)="showSection('reports')">Отчеты по продукции</button>
       </div>
 
-      <div class="task-section">
+      <div class="main-content">
         <!-- Список работников -->
         <div *ngIf="activeSection === 'workers'" class="section workers-section">
           <h2>Список работников</h2>
           <table>
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Имя</th>
                 <th>Категория</th>
+                <th>Статус</th>
                 <th>Действие</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let worker of availableWorkers">
-                <td>{{ worker.id }}</td>
                 <td>{{ worker.name }}</td>
                 <td>{{ worker.category }}</td>
-                <td>
-                  <button class="assign-task-button" (click)="selectWorker(worker)">Выбрать</button>
-                </td>
+                <td>{{ worker.status === 'available' ? 'Доступен' : 'Занят' }}</td>
+                <td><button class="btn-select" (click)="selectWorker(worker)">Выбрать</button></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- Секция для назначения задачи -->
-        <div *ngIf="selectedWorker" class="section assign-task-section">
-          <h2>Назначить задачу для {{ selectedWorker.name }}</h2>
-
-          <!-- Выбор животного -->
-          <div class="form-group">
-            <label for="animal">Животное:</label>
-            <select id="animal" [(ngModel)]="selectedAnimal">
-              <option value="">Выберите животное</option>
-              <option *ngFor="let animal of availableAnimals" [value]="animal" [disabled]="animal.status === 'busy'">
-                {{ animal.name }} (Статус: {{ animal.status }})
-              </option>
-            </select>
-          </div>
-
-          <!-- Выбор доильной установки -->
-          <div class="form-group">
-            <label for="milkingMachine">Доильная установка:</label>
-            <select id="milkingMachine" [(ngModel)]="selectedMilkingMachine">
-              <option value="">Выберите доильную установку</option>
-              <option *ngFor="let machine of availableMilkingMachines" [value]="machine" [disabled]="machine.status === 'busy'">
-                {{ machine.name }} (Статус: {{ machine.status }})
-              </option>
-            </select>
-          </div>
-
-          <!-- Кнопка назначения задачи -->
-          <button class="assign-task-button" (click)="assignTask()">Назначить задачу</button>
-
-          <!-- Уведомление -->
-          <div *ngIf="notification" class="notification success">
-            {{ notification }}
-          </div>
-
-          <!-- Красное уведомление для ошибок -->
-          <div *ngIf="errorNotification" class="notification error">
-            {{ errorNotification }}
-          </div>
-        </div>
-
-        <!-- Список рабочих задач -->
-        <div *ngIf="activeSection === 'tasks'" class="section tasks-section">
+        <!-- Рабочие задачи -->
+        <div *ngIf="activeSection === 'tasks'" class="section task-section">
           <h2>Рабочие задачи</h2>
           <table>
             <thead>
               <tr>
-                <th>Рабочий</th>
+                <th>Работник</th>
                 <th>Животное</th>
                 <th>Доильная установка</th>
                 <th>Статус</th>
@@ -104,49 +61,40 @@
         </div>
 
         <!-- Мониторинг оборудования -->
-        <div *ngIf="activeSection === 'equipment'" class="section equipment-monitoring">
+        <div *ngIf="activeSection === 'equipment'" class="section equipment-section">
           <h2>Мониторинг оборудования</h2>
-          <div class="task-options">
-            <label for="equipment-select">Выбор техники:</label>
-            <select id="equipment-select" [(ngModel)]="selectedEquipment">
-              <option *ngFor="let item of equipment" [ngValue]="item">{{ item.name }}</option>
-            </select>
-
-            <div class="equipment-actions">
-              <button [disabled]="!selectedEquipment" class="action-btn" (click)="changeEquipmentStatus(true)">Отметить как исправное</button>
-              <button [disabled]="!selectedEquipment" class="action-btn" (click)="changeEquipmentStatus(false)">Отметить как неисправное</button>
-            </div>
-
-            <div *ngIf="selectedEquipment">
-              <p><strong>Техника:</strong> {{ selectedEquipment.name }}</p>
-              <p><strong>Статус:</strong> {{ selectedEquipment.isFunctional ? 'Исправна' : 'Неисправна' }}</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Отчеты по молочной продукции -->
-        <div *ngIf="activeSection === 'reports'" class="section reports-section">
-          <h2>Отчеты по молочной продукции</h2>
           <ul>
-            <li *ngFor="let report of reports" (click)="selectReport(report)" class="report-item">
-              {{ report.name }}
+            <li *ngFor="let machine of milkingMachines">
+              {{ machine.name }} - {{ machine.status === 'available' ? 'Работает' : 'Не работает' }}
+              <button (click)="changeMilkingMachineStatus('available', machine)">Исправно</button>
+              <button (click)="changeMilkingMachineStatus('not available', machine)">Неисправно</button>
             </li>
           </ul>
-
-          <!-- Дополнительная информация о выбранном отчете -->
-          <div *ngIf="selectedReport" class="report-details">
-            <h3>Подробности отчета: {{ selectedReport.name }}</h3>
-            <p><strong>Рабочие:</strong> {{ selectedReport.details.workers.join(', ') }}</p>
-            <p><strong>Машины:</strong> {{ selectedReport.details.machines.join(', ') }}</p>
-            <p><strong>Оборудование:</strong> {{ selectedReport.details.equipment.join(', ') }}</p>
-            <p><strong>Итог:</strong> {{ selectedReport.details.summary }}</p>
-          </div>
         </div>
+
+        <!-- Назначение задачи -->
+        <div *ngIf="taskModalOpen" class="section assign-task-section">
+          <h3>Назначить задачу для {{ selectedWorker?.name }}</h3>
+          <div>
+            <label>Выберите животное:</label>
+            <select [(ngModel)]="selectedAnimal">
+              <option *ngFor="let animal of availableAnimals" [ngValue]="animal">{{ animal.name }}</option>
+            </select>
+          </div>
+          <div>
+            <label>Выберите доильную установку:</label>
+            <select [(ngModel)]="selectedMilkingMachine">
+              <option *ngFor="let machine of availableMilkingMachines" [ngValue]="machine">{{ machine.name }}</option>
+            </select>
+          </div>
+          <button (click)="assignTask()">Назначить</button>
+          <button (click)="taskModalOpen = false">Отмена</button>
+        </div>
+
+        <!-- Уведомления -->
+        <div *ngIf="notification" class="notification">{{ notification }}</div>
+        <div *ngIf="errorNotification" class="error-notification">{{ errorNotification }}</div>
       </div>
     </div>
   </main>
-
-  <div *ngIf="notification" class="notification success">
-    {{ notification }}
-  </div>
 </div>

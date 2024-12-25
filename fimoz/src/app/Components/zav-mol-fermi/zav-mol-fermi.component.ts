@@ -19,7 +19,7 @@ interface Animal {
 interface MilkingMachine {
   id: number;
   name: string;
-  status: string;
+  status: string; // Доступность: "available" или "not available"
 }
 
 interface Task {
@@ -27,23 +27,6 @@ interface Task {
   animal: Animal;
   milkingMachine: MilkingMachine;
   status: string;
-}
-
-interface Equipment {
-  id: number;
-  name: string;
-  isFunctional: boolean;
-}
-
-interface Report {
-  id: number;
-  name: string;
-  details: {
-    workers: string[];
-    machines: string[];
-    equipment: string[];
-    summary: string;
-  };
 }
 
 @Component({
@@ -71,12 +54,8 @@ export class ZavMolFermiComponent {
     { id: 1, name: 'Доильная установка 1', status: 'available' },
     { id: 2, name: 'Доильная установка 2', status: 'available' },
     { id: 3, name: 'Доильная установка 3', status: 'available' },
-  ];
-
-  equipment: Equipment[] = [
-    { id: 1, name: 'Танк для молока', isFunctional: true },
-    { id: 2, name: 'Насос для молока', isFunctional: false },
-    { id: 3, name: 'Комплект для упаковки', isFunctional: true },
+    { id: 4, name: 'Доильная установка 4', status: 'available' },
+    { id: 5, name: 'Доильная установка 5', status: 'available' },
   ];
 
   workerTasks: Task[] = [];
@@ -86,42 +65,7 @@ export class ZavMolFermiComponent {
   selectedWorker: Worker | null = null;
   selectedAnimal: Animal | null = null;
   selectedMilkingMachine: MilkingMachine | null = null;
-  selectedEquipment: Equipment | null = null;
-  selectedReport: Report | null = null; // Выбранный отчет
-
-  // Данные для отчетов
-  reports: Report[] = [
-    {
-      id: 1,
-      name: 'Отчет за октябрь 2023',
-      details: {
-        workers: ['Иван Иванов', 'Анна Сергеева'],
-        machines: ['Доильная установка 1', 'Доильная установка 2'],
-        equipment: ['Танк для молока', 'Комплект для упаковки'],
-        summary: 'Произведено 1000 литров молока. Все оборудование исправно.'
-      }
-    },
-    {
-      id: 2,
-      name: 'Отчет за сентябрь 2023',
-      details: {
-        workers: ['Петр Петров', 'Мария Васильева'],
-        machines: ['Доильная установка 3'],
-        equipment: ['Танк для молока', 'Насос для молока'],
-        summary: 'Произведено 950 литров молока. Насос для молока неисправен.'
-      }
-    },
-    {
-      id: 3,
-      name: 'Отчет за август 2023',
-      details: {
-        workers: ['Иван Иванов', 'Мария Васильева'],
-        machines: ['Доильная установка 1', 'Доильная установка 3'],
-        equipment: ['Танк для молока', 'Комплект для упаковки'],
-        summary: 'Произведено 1100 литров молока. Все оборудование исправно.'
-      }
-    }
-  ];
+  taskModalOpen: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -145,6 +89,7 @@ export class ZavMolFermiComponent {
     this.selectedWorker = worker;
     this.selectedAnimal = null;
     this.selectedMilkingMachine = null;
+    this.taskModalOpen = true; // Открываем модальное окно для назначения задачи
   }
 
   assignTask(): void {
@@ -159,7 +104,7 @@ export class ZavMolFermiComponent {
       // Обновляем статусы
       this.selectedWorker.status = 'busy';
       this.selectedAnimal.status = 'busy';
-      this.selectedMilkingMachine.status = 'busy';
+      this.selectedMilkingMachine.status = 'not available'; // Если доильная установка выбрана, она становится недоступной
 
       // Добавляем задачу в список
       this.workerTasks.push(newTask);
@@ -170,8 +115,9 @@ export class ZavMolFermiComponent {
         this.notification = '';
       }, 4000);
 
-      // Сбрасываем выбранные значения
+      // Сбрасываем выбранные значения и закрываем модальное окно
       this.resetSelections();
+      this.taskModalOpen = false;
     } else {
       this.errorNotification = 'Пожалуйста, выберите животное и доильную установку';
       setTimeout(() => {
@@ -184,25 +130,14 @@ export class ZavMolFermiComponent {
     this.selectedWorker = null;
     this.selectedAnimal = null;
     this.selectedMilkingMachine = null;
-    this.selectedEquipment = null;
-    this.selectedReport = null; // Сбрасываем выбранный отчет
+  }
+
+  changeMilkingMachineStatus(status: string, machine: MilkingMachine): void {
+    machine.status = status;
   }
 
   showSection(section: string): void {
     this.activeSection = section;
     this.resetSelections();
-  }
-
-  
-  changeEquipmentStatus(isFunctional: boolean): void {
-    if (this.selectedEquipment) {
-      this.selectedEquipment.isFunctional = isFunctional;
-      console.log(`Оборудование ${this.selectedEquipment.name} теперь ${isFunctional ? 'исправно' : 'неисправно'}`);
-    }
-  }
-
-  // Метод для выбора отчета
-  selectReport(report: Report): void {
-    this.selectedReport = report;
   }
 }
